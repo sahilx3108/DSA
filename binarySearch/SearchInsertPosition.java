@@ -28,3 +28,9 @@ public class SearchInsertPosition {
         System.out.println(ans);
     }
 }
+
+//Ceiling of a number has same code 
+
+//for floor of a number code (largest number smaller than the target) just return end instead of start 
+
+//Smallest character in an array larger than than the target char , that question also has the same code , the only diff will be removal of  
