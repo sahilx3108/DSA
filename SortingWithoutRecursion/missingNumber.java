@@ -6,7 +6,7 @@ public class missingNumber {
     public static void main(String[] args) {
         int[] arr= {4,0,2,1};
         int n=missingNumber(arr);
-        System.out.println(n);
+        System.out.println(n); 
     }
 
     static void swap(int[] arr,int first,int second){
