@@ -13,6 +13,6 @@ public class comparison {
         
         System.out.println(name1==name2);// would return false
 
-        System.out.println(name1.equals(name2)); //would return true (because it is only want to check the values)
+        System.out.println(name1.equals(name2)); //would return true (because it is only want to check the values) 
     }
 }

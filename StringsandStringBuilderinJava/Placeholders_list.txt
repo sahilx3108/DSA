@@ -1,0 +1,11 @@
+Common Format Specifiers
+Format Specifier 	Data Type	Description
+%d	Integers (byte, short, int, long)	Decimal integer output
+%f	Floating-point (float, double)	Decimal floating-point output
+%s	String	String output
+%c	Character	Single character output
+%b	Boolean	Boolean true or false value
+%n	None	Inserts a platform-specific newline character
+%x / %X	Integers	Hexadecimal representation (lowercase/uppercase)
+%t / %T	Date and Time	Prefix for date/time specific conversions
+%%	None	Inserts a literal % sign
