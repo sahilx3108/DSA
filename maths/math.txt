@@ -1,0 +1,15 @@
+// # left shift
+// any number left shift 1 is equal to double the number
+// a << 1 =2abstract
+
+// general point:
+
+// a << b = a* 2^b
+
+// 2 << 4 = 2* 2^4
+
+// # right shift 
+
+// general point:
+
+// a >> b = a/2^b

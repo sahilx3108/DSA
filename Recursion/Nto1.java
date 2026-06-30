@@ -6,6 +6,17 @@ public static void main(String[] args) {
     funrev(5);
 }
 
+//concept
+static void concept(int n){
+    if(n==0){
+        return;
+    }
+    System.out.println(n);
+    //concept(n--); would create an infinite loop 
+    concept(--n);
+    
+}
+
 static void fun(int n){
     if (n==0){
         return;

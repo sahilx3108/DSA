@@ -16,7 +16,7 @@ public class OrderAgnostic {
         boolean isasc=arr[start]<arr[end];
 
         while(start<=end){
-            int mid =start+(end-start)/2;
+            int mid =start+(end-start)/2; // prevents integer overflow errors 
             if(arr[mid]==target){
                 return mid;
             }
