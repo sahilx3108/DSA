@@ -1,6 +1,6 @@
 // # left shift
 // any number left shift 1 is equal to double the number
-// a << 1 =2abstract
+// a << 1 =2a
 
 // general point:
 
@@ -13,3 +13,57 @@
 // general point:
 
 // a >> b = a/2^b
+
+
+The Standard Method: Two's Complement
+Computers do not have a physical minus (-) sign. To represent negative integers, modern systems (and Java) use a system called Two's Complement.
+
+The leftmost bit—called the Most Significant Bit (MSB)—acts as the sign bit:
+
+0 indicates a positive number.
+
+1 indicates a negative number.
+
+How to Find the Negative of a Number
+To find the binary representation of a negative number (like -5), you perform two steps on its positive counterpart (5).
+
+Example: Finding -5 in an 8-bit system
+
+Start with the positive binary representation.
+
++5 in binary is: 0000 0101
+
+Find the 1's Complement (Flip the bits).
+
+Change every 0 to 1 and every 1 to 0.
+
+Result: 1111 1010
+
+Find the 2's Complement (Add 1).
+
+Add 1 to the result from step 2.
+
+1111 1010 + 1 = 1111 1011
+
+Final Answer: -5 in binary is 1111 1011.
+
+Why Do Computers Use Two's Complement?
+If you are asked this in an interview, here are the two main reasons:
+
+Hardware Efficiency: The CPU doesn't need separate circuitry for subtraction. To calculate A - B, the CPU simply calculates A + (-B) using the exact same addition logic.
+
+Proof: Try adding 5 (0000 0101) and -5 (1111 1011). The result is 1 0000 0000. In an 8-bit system, the 9th bit overflows and is dropped, leaving exactly 0000 0000 (Zero).
+
+Only One Zero: In older systems (like Sign-and-Magnitude), there was a "positive zero" and a "negative zero", which wasted space and complicated logic. Two's complement guarantees exactly one binary representation for 0.
+
+A Classic Bitwise Trick: n & -n
+Because of how Two's Complement works, the expression (n & -n) is a famous bit manipulation trick.
+
+What it does: It isolates the rightmost 1 bit of n and sets all other bits to 0.
+
+Where it's used: This is heavily used in advanced data structures like Fenwick Trees (Binary Indexed Trees) and counting set bits.
+
+
+# Range Formula (for n bits )
+
+-2^n-1 to 2^n-1 -1
