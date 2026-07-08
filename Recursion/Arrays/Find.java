@@ -11,8 +11,10 @@ public class Find {
         // findAllindex(arr,4,0);
         // System.out.println(list);
 
-        ArrayList<Integer> ans= findAllindex(arr, 4, 0, new ArrayList<>());
-        System.out.println(ans);
+        // ArrayList<Integer> ans= findAllindex(arr, 4, 0, new ArrayList<>());
+        // System.out.println(ans);
+
+        System.out.println(findAllindex2(arr, 4, 0));
     }
 
     static boolean find(int[] arr,int target,int index){
@@ -54,8 +56,8 @@ public class Find {
         return findindex(arr,target,index- 1);
         }
     }
-    
 
+ 
     static ArrayList<Integer> findAllindex(int[] arr,int target,int index,ArrayList<Integer> list){
         if(index==arr.length){
             return list;
@@ -66,5 +68,25 @@ public class Find {
         }
         
        return findAllindex(arr, target, index+1,list);
+    }
+
+    static ArrayList<Integer> findAllindex2(int[] arr,int target,int index){
+        
+        ArrayList<Integer> list= new ArrayList<>();
+        
+        if(index==arr.length){
+            return list;
+        }
+
+        //this will contain answer for that function call only
+        if( arr[index]==target){
+            list.add(index);
+        }
+        
+       ArrayList<Integer> ansFromBelowCalls=  findAllindex2(arr, target, index+1);
+
+       list.addAll(ansFromBelowCalls);
+
+       return list;
     }
 }
