@@ -1,0 +1,120 @@
+Dry Run: ArrayList References in Recursion
+
+The Setup
+
+Let's pretend we have a very simple array, and we want to find every index where the number 2 appears.
+
+arr: [1, 2, 3, 2]
+
+target: 2
+
+The Goal: Return an ArrayList with the answers [1, 3].
+
+Here is the Java method we are running:
+
+public ArrayList<Integer> findAllIndex(int[] arr, int target, int index, ArrayList<Integer> list) {
+    // Base Condition: If we reach the end of the array, return the list
+    if (index == arr.length) {
+        return list;
+    }
+    
+    // If we find the target, add the current index to the list
+    if (arr[index] == target) {
+        list.add(index);
+    }
+    
+    // Move forward to the next index
+    return findAllIndex(arr, target, index + 1, list);
+}
+
+
+The Master Concept: The "Remote Control"
+
+Before we start the recursion, you write this in your main method:
+ArrayList<Integer> ans = new ArrayList<>();
+
+When you use the keyword new, you are building a physical object in the Heap Memory. Let's pretend it gets built at memory address 0x100.
+The variable ans doesn't hold the list itself; it holds the "remote control" (reference) that points to 0x100.
+
+Step-by-Step Execution
+
+Initial Call (From Main)
+
+You trigger the search: findAllIndex(arr, 2, 0, ans)
+You hand over the ans remote control pointing to 0x100.
+
+Stack Frame 1 (index = 0)
+
+Variables: index = 0, list = (Remote pointing to 0x100)
+
+Check: Is arr[0] (which is 1) == 2? False.
+
+Action: Nothing is added to the list.
+
+Next Call: findAllIndex(arr, 2, 1, list)
+
+Heap Status: The object at 0x100 is still empty: [ ]
+
+Stack Frame 2 (index = 1)
+
+Variables: index = 1, list = (Remote pointing to 0x100)
+
+Check: Is arr[1] (which is 2) == 2? True!
+
+Action: list.add(1). Because list points to 0x100, it adds it to the master list in the Heap!
+
+Next Call: findAllIndex(arr, 2, 2, list)
+
+Heap Status: The object at 0x100 is now: [ 1 ]
+
+Stack Frame 3 (index = 2)
+
+Variables: index = 2, list = (Remote pointing to 0x100)
+
+Check: Is arr[2] (which is 3) == 2? False.
+
+Action: Nothing is added.
+
+Next Call: findAllIndex(arr, 2, 3, list)
+
+Heap Status: The object at 0x100 remains: [ 1 ]
+
+Stack Frame 4 (index = 3)
+
+Variables: index = 3, list = (Remote pointing to 0x100)
+
+Check: Is arr[3] (which is 2) == 2? True!
+
+Action: list.add(3). Again, the remote alters the master list.
+
+Next Call: findAllIndex(arr, 2, 4, list)
+
+Heap Status: The object at 0x100 is now: [ 1, 3 ]
+
+Stack Frame 5 (index = 4) - THE BASE CASE
+
+Variables: index = 4, list = (Remote pointing to 0x100)
+
+Check: Does index (4) == arr.length (4)? True!
+
+Action: The base case is triggered. It stops calling new functions and executes: return list;
+
+Heap Status: [ 1, 3 ]
+
+The Great Unwinding (Returning back down)
+
+Once the base case is hit, the Stack Frames start closing and passing the remote control (0x100) backwards down the chain.
+
+Frame 5 returns the reference 0x100 to Frame 4, then destroys itself.
+
+Frame 4 receives it, immediately returns 0x100 to Frame 3, then destroys itself.
+
+Frame 3 returns it to Frame 2.
+
+Frame 2 returns it to Frame 1.
+
+Frame 1 returns it back to your main method.
+
+In the end, your original ans variable in main looks at address 0x100 and sees [1, 3].
+
+The Key Takeaway: You never created 5 different lists. You created one list in the Heap, and passed 5 copies of the reference up the call stack, allowing any frame to modify the one true master list.

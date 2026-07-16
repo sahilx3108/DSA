@@ -4,26 +4,38 @@ import java.util.Arrays;
 
 public class bubbleSort {
     public static void main(String[] args) {
-        int[] arr={1,2,3,4,5};
+        // An already sorted array to test our optimized break condition
+        int[] arr = {1, 2, 3, 4, 5};
         bubble(arr);
-        System.out.println(Arrays.toString(arr));
+        System.out.println(Arrays.toString(arr)); // Output: [1, 2, 3, 4, 5]
     }
+    
     static void bubble(int[] arr){
         boolean swapped;
-        // run the steps n-1 times
-        for(int i=0;i<arr.length;i++){
-            swapped =false;
-            //for each step, max item will come at the last respective index
-            for(int j=1;j<arr.length-i;j++){
-                if(arr[j]<arr[j-1]){
-                    //swap
-                    int temp=arr[j];
-                    arr[j]=arr[j-1];
-                    arr[j-1]=temp;
-                    swapped=true;
+        
+        // OUTER LOOP: Controls the number of passes through the array
+        for(int i = 0; i < arr.length; i++){
+            swapped = false; // Reset the flag at the start of every new pass
+            
+            // INNER LOOP: Compares adjacent elements.
+            // As 'i' increases, the largest elements lock into place at the end.
+            // 'arr.length - i' prevents us from re-checking elements that are already sorted.
+            for(int j = 1; j < arr.length - i; j++){
+                
+                // If the current element is smaller than the previous one, they are out of order
+                if(arr[j] < arr[j-1]){
+                    // Standard swap using a temporary variable
+                    int temp = arr[j];
+                    arr[j] = arr[j-1];
+                    arr[j-1] = temp;
+                    
+                    // A swap occurred, so set the flag to true
+                    swapped = true;
                 }
             }
-            //if you did not swap for a particular value of i, it means the array is sorted hence stop the loop
+            
+            // OPTIMIZATION: If no two elements were swapped during this entire pass,
+            // it means the array is completely sorted. We can safely break early!
             if(!swapped){
                 break;
             }
