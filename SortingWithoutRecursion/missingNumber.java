@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class missingNumber {
     public static void main(String[] args) {
         int[] arr= {4,0,2,1};
-        int n=missingNumber(arr);
+        int n=findMissingNumber(arr);
         System.out.println(n); 
     }
 
@@ -15,7 +15,7 @@ public class missingNumber {
         arr[second]=temp;
     }
      
-    static int missingNumber(int[] arr){
+    static int findMissingNumber(int[] arr){
         int i=0;
         while(i<arr.length){
             int correct=arr[i];

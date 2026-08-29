@@ -7,12 +7,12 @@ public class findDuplicate {
     public static void main(String[] args) {
         int[] arr = {4, 3, 7, 2, 3, 1}; 
         
-        int missing = findDuplicate(arr);
+        int missing = findDuplicateNumber(arr);
         
         System.out.println("Duplicate Number: " + missing);
     }
 
-    public static int findDuplicate(int[] nums) {
+    public static int findDuplicateNumber(int[] nums) {
         int i = 0;
         while(i < nums.length) {
             if(nums[i] != i + 1) {
